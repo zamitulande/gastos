@@ -35,8 +35,9 @@ function App() {
        },500)
   }
   return (
-    <div className={modal && 'fijar'}>
+    <div className={modal ? 'fijar' : ''}>
       <Header 
+        gastos={gastos}
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValedPresupuesto={isValedPresupuesto}
