@@ -1,5 +1,14 @@
 import React from "react";
 import { formatearFecha } from "../helpers";
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions
+} from 'react-swipeable-list'
+import 'react-swipeable-list/dist/styles.css'
+
 
 import iconoAhorro from '../img/icono_ahorro.svg'
 import iconoCasa from '../img/icono_casa.svg'
@@ -23,9 +32,32 @@ const diccionarioIcono ={
 }
 
 
-const Gasto = ({ gasto }) => {
+const Gasto = ({ gasto, setGastoEditar }) => {
   const { categoria, nombre, cantidad, id, fecha} = gasto;
+
+  const leadingActions =()=>(
+      <LeadingActions>
+          <SwipeAction onClick={()=>setGastoEditar(gasto)}>
+                  Editar
+          </SwipeAction>
+      </LeadingActions>
+    )
+  
+  const trailingActions =()=>(
+      <TrailingActions>
+          <SwipeAction onClick={()=>console.log('eliminar')}>
+                Eliminar
+          </SwipeAction>
+      </TrailingActions>
+  )
   return (
+    <SwipeableList>
+      <SwipeableListItem
+
+        leadingActions={leadingActions()}
+        trailingActions={trailingActions()}
+
+      >
     <div className="gasto sombra">
       <div className="contenido-gasto">
         <img
@@ -44,6 +76,8 @@ const Gasto = ({ gasto }) => {
       </div>
       <p className="cantidad-gasto">${cantidad}</p>
     </div>
+    </SwipeableListItem>
+    </SwipeableList>
   );
 };
 
